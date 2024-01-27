@@ -1,6 +1,4 @@
-import React from 'react'
-import styles from './styles.module.css'
+import { Slider } from './components/Slider/Slider.js'
+import { SliderItem } from './components/Slider/SliderItem/SliderItem.js'
 
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+// export { Slider, SliderItem }

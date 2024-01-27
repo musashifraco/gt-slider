@@ -1,10 +1,24 @@
 import React from 'react'
 
-import { ExampleComponent } from 'mylib-musashifraco'
+// import { Slider, SliderItem } from 'mylib-musashifraco'
 import 'mylib-musashifraco/dist/index.css'
+import { Slider } from './components/Slider/Slider'
+import { SliderItem } from './components/Slider/SliderItem/SliderItem'
 
 const App = () => {
-  return <ExampleComponent text="Create React Library Example 😄" />
+  return (
+    <Slider>
+      <SliderItem>
+        <h3>1</h3>
+      </SliderItem>
+      <SliderItem>
+        <h3>2</h3>
+      </SliderItem>
+      <SliderItem>
+        <h3>3</h3>
+      </SliderItem>
+    </Slider>
+  )
 }
 
 export default App

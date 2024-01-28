@@ -1,26 +1,54 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useRef } from 'react'
+// eslint-disable-next-line no-unused-vars
+import React, { cloneElement, useEffect, useRef, useState } from 'react'
 import { Container } from './Slider.styles'
+import { useCarousel } from '../../hooks/useCarousel'
 
 export const Slider = ({ children }) => {
+  const [sliderWidth, setSliderWidth] = useState(0)
+  const [scrollController, setScrollController] = useState(0)
   const elementRef = useRef(null)
 
-  // Start observing the element when the component is mounted
+  const gap = 10
+
+  const { handleNextItem, handlePrevItem, handleScroll } = useCarousel(
+    elementRef,
+    scrollController,
+    setScrollController,
+    sliderWidth,
+    gap,
+  )
+
+  useEffect(() => {
+
+  }, [scrollController])
+
+  const childrenWithProps = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, { sliderWidth })
+    }
+  })
+
   useEffect(() => {
     const element = elementRef?.current
 
     if (!element) return
 
     const observer = new ResizeObserver(() => {
-      // 👉 Do something when the element is resized
-      console.log("change!")
+      setSliderWidth(element.clientWidth)
     })
 
     observer.observe(element)
     return () => {
-      // Cleanup the observer by unobserving all elements
       observer.disconnect()
     }
-  }, [])
-  return <Container ref={elementRef}>{children}</Container>
+  }, [scrollController])
+  return (
+    <>
+      <button onClick={handlePrevItem}>ANTERIOR</button>
+      <Container onMouseUpCapture={handleScroll} ref={elementRef}>
+        {childrenWithProps}
+      </Container>
+      <button onClick={handleNextItem}>PROXIMO</button>
+    </>
+  )
 }

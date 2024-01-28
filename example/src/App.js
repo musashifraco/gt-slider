@@ -7,17 +7,19 @@ import { SliderItem } from './components/Slider/SliderItem/SliderItem'
 
 const App = () => {
   return (
-    <Slider>
-      <SliderItem>
-        <h3>1</h3>
-      </SliderItem>
-      <SliderItem>
-        <h3>2</h3>
-      </SliderItem>
-      <SliderItem>
-        <h3>3</h3>
-      </SliderItem>
-    </Slider>
+    <>
+      <Slider>
+        <SliderItem>
+          <h3>1</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>2</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>3</h3>
+        </SliderItem>
+      </Slider>
+    </>
   )
 }
 

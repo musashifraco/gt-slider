@@ -1,6 +1,9 @@
 import styled from '@emotion/styled'
-export const Container = styled.div`
-  height: 200px;
-  width: 200px;
-  background-color: blue;
+export const Container = styled('div')`
+   min-width: ${props => props.sliderWidth};
+   background-color: red;
+
+   h3 {
+      margin: 0;
+   }
 `

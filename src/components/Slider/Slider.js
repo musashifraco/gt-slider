@@ -9,7 +9,6 @@ const Slider = ({ children }) => {
   useEffect(() => {
     const width = SliderRef?.current?.clientWidth
     setSliderWidth(width)
-    console.log('width: ' + width)
   }, [SliderRef?.current?.clientWidth])
   return <Container>{children}</Container>
 }

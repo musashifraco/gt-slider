@@ -18,6 +18,18 @@ const App = () => {
         <SliderItem>
           <h3>3</h3>
         </SliderItem>
+        <SliderItem>
+          <h3>4</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>6</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>7</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>8</h3>
+        </SliderItem>
       </Slider>
     </>
   )

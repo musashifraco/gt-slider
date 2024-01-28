@@ -1,46 +1,50 @@
-export function useCarousel(elementRef, scrollController, setScrollController, sliderWidth, gap) {
-    const element = elementRef?.current
-    
-    const handleNextItem = () => {
-        const newValueForScrollThumb = scrollController + sliderWidth + gap
+export function useCarousel(
+  elementRef,
+  scrollController,
+  setScrollController,
+  sliderWidth,
+  gap,
+  setCarouselActive,
+  carouselActive,
+  numberOfElementsWithoutSlider
+) {
+  const element = elementRef?.current
 
-        const elementIsNull = !element
-        const scrollThumbIsAtItsLimit = newValueForScrollThumb > element.scrollWidth
+  const handleNextItem = () => {
+    const elementIsNull = !element
+    const theLastElementIsActive = carouselActive === numberOfElementsWithoutSlider - 1
 
 
-        if(elementIsNull || scrollThumbIsAtItsLimit) {
-            console.log("scroll action was interrupted!")
-            return
-        }
-
-        setScrollController(newValueForScrollThumb)
-        element.scrollLeft = newValueForScrollThumb
+    if (elementIsNull || theLastElementIsActive) {
+      console.log('scroll action was interrupted!')
+      return
     }
 
-    const handlePrevItem = () => {
-        const elementIsNull = !element
-        const scrollThumbIsAtItsLimit = scrollController === 0
-        const scrollThumbIsAlmostAtItsLimit = scrollController - sliderWidth - gap < 0
+    setCarouselActive((state) => state + 1)
+    element.scrollLeft = scrollController;
+  }
 
+  const handlePrevItem = () => {
+    const elementIsNull = !element
+    const theFirstElementIsActive = carouselActive === 0
 
-        if(elementIsNull || scrollThumbIsAtItsLimit) {
-            console.log("scroll action was interrupted!")
-            return
-        }
-
-        if(scrollThumbIsAlmostAtItsLimit) {
-            setScrollController(0)
-            element.scrollLeft = 0
-            return
-        }
-
-        setScrollController(scrollController - sliderWidth - gap)
-        element.scrollLeft = scrollController - sliderWidth - gap
+    if (elementIsNull) {
+      console.log('scroll action was interrupted!')
+      return
     }
 
-    const handleScroll = () => {
-        setScrollController(element?.scrollLeft)
+    if (elementIsNull || theFirstElementIsActive) {
+      console.log('scroll action was interrupted!')
+      return
     }
 
-    return { handleNextItem, handlePrevItem, handleScroll }
+    setCarouselActive((state) => state - 1)
+    element.scrollLeft = scrollController;
+  }
+
+  const handleScroll = () => {
+    setScrollController(element?.scrollLeft)
+  }
+
+  return { handleNextItem, handlePrevItem, handleScroll }
 }

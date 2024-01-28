@@ -7,4 +7,5 @@ export const Container = styled.div`
   gap: 10px;
   flex-direction: row;
   background-color: blue;
+  padding-left: 10px;
 `

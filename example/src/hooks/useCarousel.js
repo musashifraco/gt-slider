@@ -1,19 +1,21 @@
+import { useRef, useState } from 'react'
+
 export function useCarousel(
-  elementRef,
-  scrollController,
-  setScrollController,
-  sliderWidth,
-  gap,
-  setCarouselActive,
+  sliderRef,
+  numberOfElementsWithoutSlider,
   carouselActive,
-  numberOfElementsWithoutSlider
+  setCarouselActive
 ) {
-  const element = elementRef?.current
+  let isDown = useRef(false)
+  let startX = useRef(0)
+  let scrollLeft = useRef(0)
+
+  const element = sliderRef?.current
 
   const handleNextItem = () => {
     const elementIsNull = !element
-    const theLastElementIsActive = carouselActive === numberOfElementsWithoutSlider - 1
-
+    const theLastElementIsActive =
+      carouselActive === numberOfElementsWithoutSlider - 1
 
     if (elementIsNull || theLastElementIsActive) {
       console.log('scroll action was interrupted!')
@@ -21,7 +23,6 @@ export function useCarousel(
     }
 
     setCarouselActive((state) => state + 1)
-    element.scrollLeft = scrollController;
   }
 
   const handlePrevItem = () => {
@@ -37,14 +38,43 @@ export function useCarousel(
       console.log('scroll action was interrupted!')
       return
     }
-
     setCarouselActive((state) => state - 1)
-    element.scrollLeft = scrollController;
   }
 
-  const handleScroll = () => {
-    setScrollController(element?.scrollLeft)
+  const mousedown = (e) => {
+    const elementIsNull = !element
+    if (elementIsNull) return
+    isDown = true
+
+    startX = e.pageX - element.offsetLeft
+    scrollLeft = element.scrollLeft
   }
 
-  return { handleNextItem, handlePrevItem, handleScroll }
+  console.log('renderizou')
+
+  const mouseleave = () => {
+    isDown = false
+  }
+
+  const mouseup = () => {
+    isDown = false
+  }
+
+  const mousemove = (e) => {
+    const elementIsNull = !element
+    if (!isDown || elementIsNull) return
+
+    const x = e.pageX - element.offsetLeft
+    const walk = (x - startX) * 3
+    element.scrollLeft = scrollLeft - walk
+  }
+
+  return {
+    handleNextItem,
+    handlePrevItem,
+    mousedown,
+    mouseleave,
+    mouseup,
+    mousemove
+  }
 }

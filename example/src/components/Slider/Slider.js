@@ -5,29 +5,36 @@ import { useCarousel } from '../../hooks/useCarousel'
 
 export const Slider = ({ children }) => {
   const [sliderWidth, setSliderWidth] = useState(0)
-  const [scrollController, setScrollController] = useState(0)
   const [carouselActive, setCarouselActive] = useState(0)
   const numberOfElementsWithoutSlider = React.Children.count(children)
 
   const sliderRef = useRef(null)
 
-
   const gap = 10
 
-  const { handleNextItem, handlePrevItem, handleScroll } = useCarousel(
+  const {
+    handleNextItem,
+    handlePrevItem,
+    mousedown,
+    mouseleave,
+    mouseup,
+    mousemove
+  } = useCarousel(
     sliderRef,
-    scrollController,
-    setScrollController,
-    sliderWidth,  
-    gap,
-    setCarouselActive,
+    numberOfElementsWithoutSlider,
     carouselActive,
-    numberOfElementsWithoutSlider
+    setCarouselActive
   )
-  
+
   const childrenWithProps = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
-      return React.cloneElement(child, {index, carouselActive, setScrollController, sliderWidth, gap})
+      return React.cloneElement(child, {
+        index,
+        carouselActive,
+        sliderWidth,
+        gap,
+        sliderRef
+      })
     }
   })
 
@@ -44,11 +51,17 @@ export const Slider = ({ children }) => {
     return () => {
       observer.disconnect()
     }
-  }, [scrollController])
+  }, [])
   return (
     <>
       <button onClick={handlePrevItem}>ANTERIOR</button>
-      <Container onMouseUpCapture={handleScroll} ref={sliderRef}>
+      <Container
+        onMouseDownCapture={mousedown}
+        onMouseLeave={mouseleave}
+        onMouseUpCapture={mouseup}
+        onMouseMoveCapture={mousemove}
+        ref={sliderRef}
+      >
         {childrenWithProps}
       </Container>
       <button onClick={handleNextItem}>PROXIMO</button>

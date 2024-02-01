@@ -1,13 +1,11 @@
 import styled from '@emotion/styled'
 export const Container = styled('div')`
-   background-color: ${ (props) => props.isActive === true ? "purple" : "yellow"};
-   min-width: ${(props) => {
-      return props.sliderWidthItem
-   }}px;
-   
+  background-color: ${(props) =>
+    props.isActive === true ? 'purple' : 'yellow'};
+  min-width: 200px;
+  width: 200px;
 
-
-   h3 {
-      margin: 0;
-   }
+  h3 {
+    margin: 0;
+  }
 `

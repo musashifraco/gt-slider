@@ -4,6 +4,7 @@ export const Container = styled('div')`
     props.isActive === true ? 'purple' : 'yellow'};
   min-width: 200px;
   width: 200px;
+  height: 200px;
 
   h3 {
     margin: 0;

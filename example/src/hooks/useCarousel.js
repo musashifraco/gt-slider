@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useCallback, useRef } from 'react'
 
 export function useCarousel(
   sliderRef,
@@ -9,6 +9,8 @@ export function useCarousel(
   let isDown = useRef(false)
   let startX = useRef(0)
   let scrollLeft = useRef(0)
+
+  isDown.current = false
 
   const element = sliderRef?.current
 
@@ -41,33 +43,34 @@ export function useCarousel(
     setCarouselActive((state) => state - 1)
   }
 
-  const mousedown = (e) => {
+
+  const mousedown = useCallback((e) => {
     const elementIsNull = !element
     if (elementIsNull) return
-    isDown = true
+    isDown.current = true
 
-    startX = e.pageX - element.offsetLeft
-    scrollLeft = element.scrollLeft
-  }
+    startX.current = e.pageX - element.offsetLeft
+    scrollLeft.current = element.scrollLeft
+  }, [element])
 
-  console.log('renderizou')
 
-  const mouseleave = () => {
-    isDown = false
-  }
+  const mouseleave = useCallback( () => {
+    isDown.current = false
+  }, [])
 
-  const mouseup = () => {
-    isDown = false
-  }
+  const mouseup = useCallback( () => {
+    isDown.current = false
+  }, [])
 
-  const mousemove = (e) => {
+
+  const mousemove = useCallback((e) => {
     const elementIsNull = !element
-    if (!isDown || elementIsNull) return
+    if (!isDown.current || elementIsNull) return
 
     const x = e.pageX - element.offsetLeft
-    const walk = (x - startX) * 3
-    element.scrollLeft = scrollLeft - walk
-  }
+    const walk = (x - startX.current) * 3
+    element.scrollLeft = scrollLeft.current - walk
+  }, [element])
 
   return {
     handleNextItem,

@@ -3,7 +3,7 @@ import React, { cloneElement, useEffect, useRef, useState } from 'react'
 import { Container } from './Slider.styles'
 import { useCarousel } from '../../hooks/useCarousel'
 
-export const Slider = ({ children }) => {
+export const Slider = ({ children, config }) => {
   const [sliderWidth, setSliderWidth] = useState(0)
   const [carouselActive, setCarouselActive] = useState(0)
   const numberOfElementsWithoutSlider = React.Children.count(children)
@@ -15,10 +15,8 @@ export const Slider = ({ children }) => {
   const {
     handleNextItem,
     handlePrevItem,
-    mousedown,
-    mouseleave,
-    mouseup,
-    mousemove
+    handleMouseDown,
+    handleTouchStart
   } = useCarousel(
     sliderRef,
     numberOfElementsWithoutSlider,
@@ -33,7 +31,8 @@ export const Slider = ({ children }) => {
         carouselActive,
         sliderWidth,
         gap,
-        sliderRef
+        sliderRef,
+        config
       })
     }
   })
@@ -56,11 +55,10 @@ export const Slider = ({ children }) => {
     <>
       <button onClick={handlePrevItem}>ANTERIOR</button>
       <Container
-        onMouseDownCapture={mousedown}
-        onMouseLeave={mouseleave}
-        onMouseUpCapture={mouseup}
-        onMouseMoveCapture={mousemove}
         ref={sliderRef}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleTouchStart}
+        gap={config.gap}
       >
         {childrenWithProps}
       </Container>

@@ -1,4 +1,4 @@
-import { useCallback, useRef } from 'react'
+import React from 'react'
 
 export function useCarousel(
   sliderRef,
@@ -6,12 +6,6 @@ export function useCarousel(
   carouselActive,
   setCarouselActive
 ) {
-  let isDown = useRef(false)
-  let startX = useRef(0)
-  let scrollLeft = useRef(0)
-
-  isDown.current = false
-
   const element = sliderRef?.current
 
   const handleNextItem = () => {
@@ -43,41 +37,90 @@ export function useCarousel(
     setCarouselActive((state) => state - 1)
   }
 
+  const handleMouseDown = React.useCallback(
+    (e) => {
+      const ele = sliderRef.current
+      if (!ele) {
+        return
+      }
+      const startPos = {
+        left: ele.scrollLeft,
+        top: ele.scrollTop,
+        x: e.clientX,
+        y: e.clientY
+      }
+      ele.style.scrollBehavior = 'inherit'
+      const handleMouseMove = (e) => {
+        const dx = e.clientX - startPos.x
+        const dy = e.clientY - startPos.y
+        ele.scrollTop = startPos.top - dy
+        ele.scrollLeft = startPos.left - dx
+        updateCursor(ele)
+      }
 
-  const mousedown = useCallback((e) => {
-    const elementIsNull = !element
-    if (elementIsNull) return
-    isDown.current = true
+      const handleMouseUp = () => {
+        console.log("Slider scrollLeft: " + ele.scrollLeft)
+        ele.style.scrollBehavior = 'smooth'
+        document.removeEventListener('mousemove', handleMouseMove)
+        document.removeEventListener('mouseup', handleMouseUp)
+        resetCursor(ele)
+      }
 
-    startX.current = e.pageX - element.offsetLeft
-    scrollLeft.current = element.scrollLeft
-  }, [element])
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
+    },
+    [sliderRef]
+  )
 
+  const handleTouchStart = React.useCallback(
+    (e) => {
+      const ele = sliderRef.current
+      if (!ele) {
+        return
+      }
+      const touch = e.touches[0]
+      const startPos = {
+        left: ele.scrollLeft,
+        top: ele.scrollTop,
+        x: touch.clientX,
+        y: touch.clientY
+      }
 
-  const mouseleave = useCallback( () => {
-    isDown.current = false
-  }, [])
+      const handleTouchMove = (e) => {
+        const touch = e.touches[0]
+        const dx = touch.clientX - startPos.x
+        const dy = touch.clientY - startPos.y
+        ele.scrollTop = startPos.top - dy
+        ele.scrollLeft = startPos.left - dx
+        updateCursor(ele)
+      }
 
-  const mouseup = useCallback( () => {
-    isDown.current = false
-  }, [])
+      const handleTouchEnd = () => {
+        document.removeEventListener('touchmove', handleTouchMove)
+        document.removeEventListener('touchend', handleTouchEnd)
+        resetCursor(ele)
+      }
 
+      document.addEventListener('touchmove', handleTouchMove)
+      document.addEventListener('touchend', handleTouchEnd)
+    },
+    [sliderRef]
+  )
 
-  const mousemove = useCallback((e) => {
-    const elementIsNull = !element
-    if (!isDown.current || elementIsNull) return
+  const updateCursor = (ele) => {
+    ele.style.cursor = 'grabbing'
+    ele.style.userSelect = 'none'
+  }
 
-    const x = e.pageX - element.offsetLeft
-    const walk = (x - startX.current) * 3
-    element.scrollLeft = scrollLeft.current - walk
-  }, [element])
+  const resetCursor = (ele) => {
+    ele.style.cursor = 'grab'
+    ele.style.removeProperty('user-select')
+  }
 
   return {
     handleNextItem,
     handlePrevItem,
-    mousedown,
-    mouseleave,
-    mouseup,
-    mousemove
+    handleMouseDown,
+    handleTouchStart
   }
 }

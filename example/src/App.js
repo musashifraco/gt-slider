@@ -6,9 +6,15 @@ import { Slider } from './components/Slider/Slider'
 import { SliderItem } from './components/Slider/SliderItem/SliderItem'
 
 const App = () => {
+  
+  const config = {
+    visibleElements: 1,
+    gap: 20
+  }
+
   return (
     <>
-      <Slider>
+      <Slider config={config}>
         <SliderItem>
           <h3>1</h3>
         </SliderItem>

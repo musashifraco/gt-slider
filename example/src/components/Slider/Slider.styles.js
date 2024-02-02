@@ -2,10 +2,14 @@ import styled from '@emotion/styled'
 export const Container = styled.div`
   display: flex;
   overflow-x: scroll;
-  scroll-behavior: smooth !important;
   width: 60%;
-  gap: 10px;
+  gap: ${(props) => {
+      return props.gap
+   }}px;
   flex-direction: row;
   background-color: blue;
-  padding-left: 10px;
+  padding-left: ${(props) => {
+      return props.gap
+   }}px;
+  scroll-behavior: smooth;
 `

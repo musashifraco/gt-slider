@@ -7,14 +7,25 @@ export const SliderItem = ({
   carouselActive,
   sliderWidth,
   gap,
-  sliderRef
+  sliderRef,
+  config
 }) => {
+  const numberOfGaps = config.visibleElements + 1
+
+
   const sliderItemRef = useRef(null)
-  const sliderWidthItem = (sliderWidth - 4 * gap) / 2
+  const sliderWidthItem = (sliderWidth - numberOfGaps * config.gap) / config.visibleElements
 
   if (sliderItemRef.current && sliderRef.current) {
+
     if (carouselActive === index) {
-      sliderRef.current.scrollLeft = sliderItemRef.current.offsetLeft - gap
+      var meioDoContainer = sliderRef.current.offsetWidth / 2;
+      var posicaoDoElemento = sliderItemRef.current.offsetLeft + sliderItemRef.current.offsetWidth / 2;
+
+      // Calcula a nova posição de scroll para centralizar o elemento
+      var novaPosicaoScroll = posicaoDoElemento - meioDoContainer;
+      console.log("SliderItem offsetLeft: " + novaPosicaoScroll)
+      sliderRef.current.scrollLeft = novaPosicaoScroll
     }
   }
 

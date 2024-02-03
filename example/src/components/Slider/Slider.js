@@ -21,7 +21,8 @@ export const Slider = ({ children, config }) => {
     sliderRef,
     numberOfElementsWithoutSlider,
     carouselActive,
-    setCarouselActive
+    setCarouselActive,
+    config
   )
 
   const childrenWithProps = React.Children.map(children, (child, index) => {
@@ -30,7 +31,6 @@ export const Slider = ({ children, config }) => {
         index,
         carouselActive,
         sliderWidth,
-        gap,
         sliderRef,
         config
       })

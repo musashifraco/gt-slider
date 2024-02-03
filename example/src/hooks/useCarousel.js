@@ -4,43 +4,51 @@ export function useCarousel(
   sliderRef,
   numberOfElementsWithoutSlider,
   carouselActive,
-  setCarouselActive
+  setCarouselActive,
+  config
 ) {
   const element = sliderRef?.current
 
   const handleNextItem = () => {
     const elementIsNull = !element
-    const theLastElementIsActive =
-      carouselActive === numberOfElementsWithoutSlider - 1
+    const nextElement = carouselActive + config.elementsToScroll
 
-      if (elementIsNull) {
-        console.log('scroll action was interrupted!')
-        return
-      }
-
-    if (theLastElementIsActive) {
-      setCarouselActive(0)
-      return
-    }
-
-    setCarouselActive((state) => state + 1)
-  }
-
-  const handlePrevItem = () => {
-    const elementIsNull = !element
-    const lastElement = numberOfElementsWithoutSlider - 1
-    const theFirstElementIsActive = carouselActive === 0
+    const pastElements = carouselActive + 1 + config.elementsToScroll
+    const returnToStart = pastElements > numberOfElementsWithoutSlider
 
     if (elementIsNull) {
       console.log('scroll action was interrupted!')
       return
     }
 
-    if (theFirstElementIsActive) {
+    if (returnToStart) {
+      setCarouselActive(0)
+      return
+    }
+
+    setCarouselActive(nextElement)
+  }
+
+  const handlePrevItem = () => {
+    const elementIsNull = !element
+    const prevElement = carouselActive - config.elementsToScroll
+
+    const lastElement = numberOfElementsWithoutSlider - config.elementsToScroll
+
+    const pastElements = carouselActive + 1 - config.elementsToScroll
+    const returnToStart = pastElements <= 0
+
+    if (elementIsNull) {
+      console.log('scroll action was interrupted!')
+      return
+    }
+
+    if (returnToStart) {
       setCarouselActive(lastElement)
       return
     }
-    setCarouselActive((state) => state - 1)
+
+    setCarouselActive(prevElement)
   }
 
   const handleMouseDown = React.useCallback(

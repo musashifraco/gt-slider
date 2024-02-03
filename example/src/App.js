@@ -8,8 +8,10 @@ import { SliderItem } from './components/Slider/SliderItem/SliderItem'
 const App = () => {
   
   const config = {
-    visibleElements: 3,
-    gap: 10
+    visibleElements: 2,
+    elementsToScroll: 1,
+    gap: 10,
+    centerMode: false
   }
 
   return (

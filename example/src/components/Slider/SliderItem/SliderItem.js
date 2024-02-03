@@ -6,7 +6,6 @@ export const SliderItem = ({
   index,
   carouselActive,
   sliderWidth,
-  gap,
   sliderRef,
   config
 }) => {
@@ -18,10 +17,19 @@ export const SliderItem = ({
 
   if (sliderItemRef.current && sliderRef.current) {
 
-    if (carouselActive === index) {
-      var meioDoContainer = sliderRef.current.offsetWidth / 2;
-      var posicaoDoElemento = sliderItemRef.current.offsetLeft + sliderItemRef.current.offsetWidth / 2;
-      var novaPosicaoScroll = posicaoDoElemento - meioDoContainer;
+    // center mode true
+    if (carouselActive === index && config.centerMode === true) {
+      let meioDoContainer = sliderRef.current.offsetWidth / 2;
+      let posicaoDoElemento = sliderItemRef.current.offsetLeft + sliderItemRef.current.offsetWidth / 2;
+      let novaPosicaoScroll = posicaoDoElemento - meioDoContainer;
+
+      sliderRef.current.scrollLeft = novaPosicaoScroll
+    }
+
+    // center mode false
+
+    if(carouselActive === index && config.centerMode === false) {
+      let novaPosicaoScroll = sliderItemRef.current.offsetLeft - config.gap
 
       sliderRef.current.scrollLeft = novaPosicaoScroll
     }
@@ -30,7 +38,7 @@ export const SliderItem = ({
   return (
     <Container
       sliderWidthItem={sliderWidthItem}
-      gap={gap}
+      gap={config.gap}
       isActive={index === carouselActive}
       ref={sliderItemRef}
     >

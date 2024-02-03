@@ -21,10 +21,8 @@ export const SliderItem = ({
     if (carouselActive === index) {
       var meioDoContainer = sliderRef.current.offsetWidth / 2;
       var posicaoDoElemento = sliderItemRef.current.offsetLeft + sliderItemRef.current.offsetWidth / 2;
-
-      // Calcula a nova posição de scroll para centralizar o elemento
       var novaPosicaoScroll = posicaoDoElemento - meioDoContainer;
-      console.log("SliderItem offsetLeft: " + novaPosicaoScroll)
+
       sliderRef.current.scrollLeft = novaPosicaoScroll
     }
   }

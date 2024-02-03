@@ -13,8 +13,13 @@ export function useCarousel(
     const theLastElementIsActive =
       carouselActive === numberOfElementsWithoutSlider - 1
 
-    if (elementIsNull || theLastElementIsActive) {
-      console.log('scroll action was interrupted!')
+      if (elementIsNull) {
+        console.log('scroll action was interrupted!')
+        return
+      }
+
+    if (theLastElementIsActive) {
+      setCarouselActive(0)
       return
     }
 
@@ -23,6 +28,7 @@ export function useCarousel(
 
   const handlePrevItem = () => {
     const elementIsNull = !element
+    const lastElement = numberOfElementsWithoutSlider - 1
     const theFirstElementIsActive = carouselActive === 0
 
     if (elementIsNull) {
@@ -30,8 +36,8 @@ export function useCarousel(
       return
     }
 
-    if (elementIsNull || theFirstElementIsActive) {
-      console.log('scroll action was interrupted!')
+    if (theFirstElementIsActive) {
+      setCarouselActive(lastElement)
       return
     }
     setCarouselActive((state) => state - 1)
@@ -59,7 +65,6 @@ export function useCarousel(
       }
 
       const handleMouseUp = () => {
-        console.log("Slider scrollLeft: " + ele.scrollLeft)
         ele.style.scrollBehavior = 'smooth'
         document.removeEventListener('mousemove', handleMouseMove)
         document.removeEventListener('mouseup', handleMouseUp)

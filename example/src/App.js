@@ -8,8 +8,8 @@ import { SliderItem } from './components/Slider/SliderItem/SliderItem'
 const App = () => {
   
   const config = {
-    visibleElements: 1,
-    gap: 20
+    visibleElements: 3,
+    gap: 10
   }
 
   return (
@@ -28,13 +28,13 @@ const App = () => {
           <h3>4</h3>
         </SliderItem>
         <SliderItem>
+          <h3>5</h3>
+        </SliderItem>
+        <SliderItem>
           <h3>6</h3>
         </SliderItem>
         <SliderItem>
           <h3>7</h3>
-        </SliderItem>
-        <SliderItem>
-          <h3>8</h3>
         </SliderItem>
       </Slider>
     </>

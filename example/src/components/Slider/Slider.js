@@ -10,8 +10,6 @@ export const Slider = ({ children, config }) => {
 
   const sliderRef = useRef(null)
 
-  const gap = 10
-
   const {
     handleNextItem,
     handlePrevItem,

@@ -8,8 +8,8 @@ import { SliderItem } from './components/Slider/SliderItem/SliderItem'
 const App = () => {
   
   const config = {
-    visibleElements: 2,
-    elementsToScroll: 1,
+    visibleElements: 7,
+    elementsToScroll: 7,
     gap: 10,
     centerMode: false
   }
@@ -37,6 +37,27 @@ const App = () => {
         </SliderItem>
         <SliderItem>
           <h3>7</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>8</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>9</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>10</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>11</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>12</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>13</h3>
+        </SliderItem>
+        <SliderItem>
+          <h3>14</h3>
         </SliderItem>
       </Slider>
     </>

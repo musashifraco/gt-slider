@@ -16,7 +16,6 @@ npm install --save mylib-musashifraco
 import React, { Component } from 'react'
 
 import MyComponent from 'mylib-musashifraco'
-import 'mylib-musashifraco/dist/index.css'
 
 class Example extends Component {
   render() {

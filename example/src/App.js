@@ -1,7 +1,7 @@
 import React from 'react'
 
 // import { Slider, SliderItem } from 'mylib-musashifraco'
-import 'mylib-musashifraco/dist/index.css'
+import './index.css'
 import { Slider } from './components/Slider/Slider'
 import { SliderItem } from './components/Slider/SliderItem/SliderItem'
 

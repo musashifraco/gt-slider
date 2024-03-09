@@ -9,12 +9,13 @@ const MultipleItems = () => {
     visibleElements: 3,
     elementsToScroll: 1,
     gap: 10,
-    centerMode: false
+    centerMode: false,
+    infiniteMode: true
   }
 
   return (
     <Container>
-      <h2>Multiple Items</h2>
+      <h2>Multiple Items (infinite)</h2>
       <Slider config={config}>
         <SliderItem>
           <div className='content'>

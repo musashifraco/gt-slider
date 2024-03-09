@@ -9,7 +9,8 @@ const CenterMode = () => {
     visibleElements: 4,
     elementsToScroll: 1,
     gap: 10,
-    centerMode: true
+    centerMode: true,
+    infiniteMode: true
   }
 
   return (

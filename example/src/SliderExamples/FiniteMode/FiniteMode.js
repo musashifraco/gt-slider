@@ -1,21 +1,21 @@
 import React from 'react'
 
 import { Slider, SliderItem } from 'mylib-musashifraco'
-import { Container } from './SimpleSlider.styles'
+import { Container } from './FiniteMode.styles'
 import '../../index.css'
 
-const SimpleSlider = () => {
+const FiniteMode = () => {
   const config = {
-    visibleElements: 1,
+    visibleElements: 3,
     elementsToScroll: 1,
     gap: 10,
     centerMode: false,
-    infiniteMode: true
+    infiniteMode: false
   }
 
   return (
     <Container>
-      <h2>Simple Slider </h2>
+      <h2>Multiple Items (finite)</h2>
       <Slider config={config}>
         <SliderItem>
           <div className='content'>
@@ -92,4 +92,4 @@ const SimpleSlider = () => {
   )
 }
 
-export default SimpleSlider
+export default FiniteMode

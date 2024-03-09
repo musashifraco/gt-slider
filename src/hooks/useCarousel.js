@@ -22,7 +22,16 @@ export function useCarousel(
     }
 
     if (returnToStart) {
-      setCarouselActive(0)
+      switch (config.infiniteMode) {
+        // infinite mode
+        case true:
+          setCarouselActive(0)
+          break
+        // finite mode
+        case false:
+          console.log('scroll action was interrupted!')
+      }
+
       return
     }
 
@@ -44,7 +53,15 @@ export function useCarousel(
     }
 
     if (returnToStart) {
-      setCarouselActive(lastElement)
+      switch (config.infiniteMode) {
+        // infinite mode
+        case true:
+          setCarouselActive(lastElement)
+          break
+        // finite mode
+        case false:
+          console.log('modo infinito inativo!')
+      }
       return
     }
 

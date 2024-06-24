@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Slider, SliderItem } from 'mylib-musashifraco'
+import { Slider, SliderItem, useCarousel } from 'mylib-musashifraco'
 import { Container } from './SimpleSlider.styles'
 import '../../index.css'
 
 const SimpleSlider = () => {
+  const [carouselActive, setCarouselActive] = useState(0)
+  const numberOfElementsWithoutSlider = 14
+
+
+
   const config = {
     visibleElements: 1,
     elementsToScroll: 1,
@@ -13,10 +18,26 @@ const SimpleSlider = () => {
     infiniteMode: true
   }
 
+  const { handleNextItem, handlePrevItem, handleMouseDown, handleTouchStart, sliderRef } =
+    useCarousel(
+      numberOfElementsWithoutSlider,
+      carouselActive,
+      setCarouselActive,
+      config
+    )
+
+
+
   return (
     <Container>
       <h2>Simple Slider </h2>
-      <Slider config={config}>
+      <button onClick={handlePrevItem}>
+        esquerda
+      </button>
+      <button onClick={handleNextItem}>
+        direita
+      </button>
+      <Slider config={config} sliderRef={sliderRef} carouselActive={carouselActive} handleMouseDown={handleMouseDown} handleTouchStart={handleTouchStart}>
         <SliderItem>
           <div className='content'>
             <h3>1</h3>

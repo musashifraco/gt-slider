@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 export function useCarousel(
-  sliderRef,
   numberOfElementsWithoutSlider,
   carouselActive,
   setCarouselActive,
   config
 ) {
-  const element = sliderRef?.current
+  const sliderRef = useRef(null)
 
   const handleNextItem = () => {
+    const element = sliderRef?.current
     const elementIsNull = !element
     const nextElement = carouselActive + config.elementsToScroll
 
@@ -17,7 +17,7 @@ export function useCarousel(
     const returnToStart = pastElements > numberOfElementsWithoutSlider
 
     if (elementIsNull) {
-      console.log('scroll action was interrupted!')
+      console.log('scroll action was interrupted! because: element is null!')
       return
     }
 
@@ -29,7 +29,9 @@ export function useCarousel(
           break
         // finite mode
         case false:
-          console.log('scroll action was interrupted!')
+          console.log(
+            'scroll action was interrupted! because: infinity mode disabled'
+          )
       }
 
       return
@@ -39,6 +41,7 @@ export function useCarousel(
   }
 
   const handlePrevItem = () => {
+    const element = sliderRef?.current
     const elementIsNull = !element
     const prevElement = carouselActive - config.elementsToScroll
 
@@ -48,7 +51,7 @@ export function useCarousel(
     const returnToStart = pastElements <= 0
 
     if (elementIsNull) {
-      console.log('scroll action was interrupted!')
+      console.log('scroll action was interrupted! because: element is null!')
       return
     }
 
@@ -151,6 +154,7 @@ export function useCarousel(
     handleNextItem,
     handlePrevItem,
     handleMouseDown,
-    handleTouchStart
+    handleTouchStart,
+    sliderRef
   }
 }

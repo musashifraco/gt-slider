@@ -2,29 +2,30 @@ import React, {
   // eslint-disable-next-line no-unused-vars
   cloneElement,
   useEffect,
-  useRef,
   useState
 } from 'react'
-import { useCarousel } from '../../hooks/useCarousel'
-import { ArrowLeft, ArrowRight } from '../../svg/Icons'
+// import { ArrowLeft, ArrowRight } from '../../svg/Icons'
 
 import * as S from './Slider.styles'
 
-export const Slider = ({ children, config }) => {
+export const Slider = ({
+  children,
+  config,
+  sliderRef,
+  carouselActive,
+  handleMouseDown,
+  handleTouchStart
+}) => {
   const [sliderWidth, setSliderWidth] = useState(0)
-  const [carouselActive, setCarouselActive] = useState(0)
-  const numberOfElementsWithoutSlider = React.Children.count(children)
 
-  const sliderRef = useRef(null)
-
-  const { handleNextItem, handlePrevItem, handleMouseDown, handleTouchStart } =
+  /*   const { handleNextItem, handlePrevItem, handleMouseDown, handleTouchStart } =
     useCarousel(
       sliderRef,
       numberOfElementsWithoutSlider,
       carouselActive,
       setCarouselActive,
       config
-    )
+    ) */
 
   const childrenWithProps = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
@@ -55,9 +56,9 @@ export const Slider = ({ children, config }) => {
   }, [])
   return (
     <S.Container>
-      <S.SliderButton onClick={handlePrevItem}>
+      {/*       <S.SliderButton onClick={handlePrevItem}>
         <ArrowLeft />
-      </S.SliderButton>
+      </S.SliderButton> */}
       <S.SliderContainer
         ref={sliderRef}
         onMouseDown={handleMouseDown}
@@ -66,9 +67,9 @@ export const Slider = ({ children, config }) => {
       >
         {childrenWithProps}
       </S.SliderContainer>
-      <S.SliderButton onClick={handleNextItem}>
+      {/*       <S.SliderButton onClick={handleNextItem}>
         <ArrowRight />
-      </S.SliderButton>
+      </S.SliderButton> */}
     </S.Container>
   )
 }

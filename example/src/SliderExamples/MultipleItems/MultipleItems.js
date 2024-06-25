@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import { Slider, SliderItem, useCarousel } from 'mylib-musashifraco'
 import { Container } from './MultipleItems.styles'

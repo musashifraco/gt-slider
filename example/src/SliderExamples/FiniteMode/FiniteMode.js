@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Slider, SliderItem } from 'mylib-musashifraco'
+import { Slider, SliderItem, useCarousel } from 'mylib-musashifraco'
 import { Container } from './FiniteMode.styles'
 import '../../index.css'
 
@@ -10,13 +10,26 @@ const FiniteMode = () => {
     elementsToScroll: 1,
     gap: 10,
     centerMode: false,
-    infiniteMode: false
+    infiniteMode: false,
+    numberOfElementsWithoutSlider: 14
   }
+
+  const { handleNextItem, handlePrevItem, ...carouselProps } =
+  useCarousel(
+    config
+  )
+
 
   return (
     <Container>
       <h2>Multiple Items (finite)</h2>
-      <Slider config={config}>
+      <button onClick={handlePrevItem}>
+        esquerda
+      </button>
+      <button onClick={handleNextItem}>
+        direita
+      </button>
+      <Slider config={config} {...carouselProps}>
         <SliderItem>
           <div className='content'>
             <h3>1</h3>

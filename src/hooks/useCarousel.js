@@ -1,20 +1,16 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 
-export function useCarousel(
-  numberOfElementsWithoutSlider,
-  carouselActive,
-  setCarouselActive,
-  config
-) {
+export function useCarousel(config) {
+  const [carouselActive, setCarouselActive] = useState(0)
   const sliderRef = useRef(null)
 
   const handleNextItem = () => {
     const element = sliderRef?.current
     const elementIsNull = !element
-    const nextElement = carouselActive + config.elementsToScroll
+    const nextElement = carouselActive + config?.elementsToScroll
 
-    const pastElements = carouselActive + 1 + config.elementsToScroll
-    const returnToStart = pastElements > numberOfElementsWithoutSlider
+    const pastElements = carouselActive + 1 + config?.elementsToScroll
+    const returnToStart = pastElements > config?.numberOfElementsWithoutSlider
 
     if (elementIsNull) {
       console.log('scroll action was interrupted! because: element is null!')
@@ -22,7 +18,7 @@ export function useCarousel(
     }
 
     if (returnToStart) {
-      switch (config.infiniteMode) {
+      switch (config?.infiniteMode) {
         // infinite mode
         case true:
           setCarouselActive(0)
@@ -43,11 +39,12 @@ export function useCarousel(
   const handlePrevItem = () => {
     const element = sliderRef?.current
     const elementIsNull = !element
-    const prevElement = carouselActive - config.elementsToScroll
+    const prevElement = carouselActive - config?.elementsToScroll
 
-    const lastElement = numberOfElementsWithoutSlider - config.elementsToScroll
+    const lastElement =
+      config?.numberOfElementsWithoutSlider - config?.elementsToScroll
 
-    const pastElements = carouselActive + 1 - config.elementsToScroll
+    const pastElements = carouselActive + 1 - config?.elementsToScroll
     const returnToStart = pastElements <= 0
 
     if (elementIsNull) {
@@ -56,7 +53,7 @@ export function useCarousel(
     }
 
     if (returnToStart) {
-      switch (config.infiniteMode) {
+      switch (config?.infiniteMode) {
         // infinite mode
         case true:
           setCarouselActive(lastElement)
@@ -155,6 +152,7 @@ export function useCarousel(
     handlePrevItem,
     handleMouseDown,
     handleTouchStart,
-    sliderRef
+    sliderRef,
+    carouselActive
   }
 }

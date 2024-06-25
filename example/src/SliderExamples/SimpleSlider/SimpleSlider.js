@@ -1,32 +1,20 @@
-import React, { useState } from 'react'
-
+import React from 'react'
 import { Slider, SliderItem, useCarousel } from 'mylib-musashifraco'
 import { Container } from './SimpleSlider.styles'
 import '../../index.css'
 
 const SimpleSlider = () => {
-  const [carouselActive, setCarouselActive] = useState(0)
-  const numberOfElementsWithoutSlider = 14
-
-
-
   const config = {
     visibleElements: 1,
     elementsToScroll: 1,
     gap: 10,
     centerMode: false,
-    infiniteMode: true
+    infiniteMode: true,
+    numberOfElementsWithoutSlider: 14
   }
 
-  const { handleNextItem, handlePrevItem, handleMouseDown, handleTouchStart, sliderRef } =
-    useCarousel(
-      numberOfElementsWithoutSlider,
-      carouselActive,
-      setCarouselActive,
-      config
-    )
-
-
+  const { handleNextItem, handlePrevItem, ...carouselProps } =
+    useCarousel(config)
 
   return (
     <Container>
@@ -37,7 +25,7 @@ const SimpleSlider = () => {
       <button onClick={handleNextItem}>
         direita
       </button>
-      <Slider config={config} sliderRef={sliderRef} carouselActive={carouselActive} handleMouseDown={handleMouseDown} handleTouchStart={handleTouchStart}>
+      <Slider config={config} {...carouselProps}>
         <SliderItem>
           <div className='content'>
             <h3>1</h3>

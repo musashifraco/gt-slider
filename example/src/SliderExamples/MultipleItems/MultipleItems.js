@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import { Slider, SliderItem } from 'mylib-musashifraco'
+import { Slider, SliderItem, useCarousel } from 'mylib-musashifraco'
 import { Container } from './MultipleItems.styles'
 import '../../index.css'
 
@@ -10,13 +10,26 @@ const MultipleItems = () => {
     elementsToScroll: 1,
     gap: 10,
     centerMode: false,
-    infiniteMode: true
+    infiniteMode: true,
+    numberOfElementsWithoutSlider: 14
+
   }
+
+  const { handleNextItem, handlePrevItem, ...carouselProps } =
+    useCarousel(
+      config
+    )
 
   return (
     <Container>
       <h2>Multiple Items (infinite)</h2>
-      <Slider config={config}>
+      <button onClick={handlePrevItem}>
+        esquerda
+      </button>
+      <button onClick={handleNextItem}>
+        direita
+      </button>
+      <Slider config={config} {...carouselProps}>
         <SliderItem>
           <div className='content'>
             <h3>1</h3>

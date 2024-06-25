@@ -4,7 +4,6 @@ import React, {
   useEffect,
   useState
 } from 'react'
-// import { ArrowLeft, ArrowRight } from '../../svg/Icons'
 
 import * as S from './Slider.styles'
 
@@ -17,15 +16,6 @@ export const Slider = ({
   handleTouchStart
 }) => {
   const [sliderWidth, setSliderWidth] = useState(0)
-
-  /*   const { handleNextItem, handlePrevItem, handleMouseDown, handleTouchStart } =
-    useCarousel(
-      sliderRef,
-      numberOfElementsWithoutSlider,
-      carouselActive,
-      setCarouselActive,
-      config
-    ) */
 
   const childrenWithProps = React.Children.map(children, (child, index) => {
     if (React.isValidElement(child)) {
@@ -46,6 +36,7 @@ export const Slider = ({
 
     // eslint-disable-next-line no-undef
     const observer = new ResizeObserver(() => {
+      console.log(element.clientWidth)
       setSliderWidth(element.clientWidth)
     })
 
@@ -56,9 +47,6 @@ export const Slider = ({
   }, [])
   return (
     <S.Container>
-      {/*       <S.SliderButton onClick={handlePrevItem}>
-        <ArrowLeft />
-      </S.SliderButton> */}
       <S.SliderContainer
         ref={sliderRef}
         onMouseDown={handleMouseDown}
@@ -67,9 +55,6 @@ export const Slider = ({
       >
         {childrenWithProps}
       </S.SliderContainer>
-      {/*       <S.SliderButton onClick={handleNextItem}>
-        <ArrowRight />
-      </S.SliderButton> */}
     </S.Container>
   )
 }

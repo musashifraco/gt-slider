@@ -1,6 +1,6 @@
 import React from 'react'
 import { Slider, SliderItem, useCarousel } from 'mylib-musashifraco'
-import { Container } from './SimpleSlider.styles'
+import * as S from './SimpleSlider.styles'
 import '../../index.css'
 
 const SimpleSlider = () => {
@@ -17,14 +17,11 @@ const SimpleSlider = () => {
     useCarousel(config)
 
   return (
-    <Container>
-      <h2>Simple Slider </h2>
-      <button onClick={handlePrevItem}>
-        esquerda
-      </button>
-      <button onClick={handleNextItem}>
-        direita
-      </button>
+    <S.Container>
+      <S.Title>Simple Slider </S.Title>
+      <S.SliderContainer>
+      <S.PrevItemButton onClick={handlePrevItem}>
+      </S.PrevItemButton>
       <Slider config={config} {...carouselProps}>
         <SliderItem>
           <div className='content'>
@@ -97,7 +94,10 @@ const SimpleSlider = () => {
           </div>
         </SliderItem>
       </Slider>
-    </Container>
+      <S.NextItemButton onClick={handleNextItem}>
+      </S.NextItemButton>
+      </S.SliderContainer>
+    </S.Container>
   )
 }
 

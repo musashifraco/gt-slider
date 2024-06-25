@@ -10,7 +10,7 @@ export const SliderContainer = styled.div`
   position: relative;
   display: flex;
   overflow-x: scroll;
-  height: 100px;
+  height: auto;
   width: 1000px;
   gap: ${(props) => {
     return props.gap

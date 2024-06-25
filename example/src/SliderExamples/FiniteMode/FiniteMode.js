@@ -1,8 +1,8 @@
 import React from 'react'
 
 import { Slider, SliderItem, useCarousel } from 'mylib-musashifraco'
-import { Container } from './FiniteMode.styles'
 import '../../index.css'
+import * as S from './FiniteMode.styles'
 
 const FiniteMode = () => {
   const config = {
@@ -21,14 +21,11 @@ const FiniteMode = () => {
 
 
   return (
-    <Container>
-      <h2>Multiple Items (finite)</h2>
-      <button onClick={handlePrevItem}>
-        esquerda
-      </button>
-      <button onClick={handleNextItem}>
-        direita
-      </button>
+    <S.Container>
+      <S.Title>Multiple Items (finite)</S.Title>
+      <S.SliderContainer>
+      <S.PrevItemButton onClick={handlePrevItem}>
+      </S.PrevItemButton>
       <Slider config={config} {...carouselProps}>
         <SliderItem>
           <div className='content'>
@@ -101,7 +98,11 @@ const FiniteMode = () => {
           </div>
         </SliderItem>
       </Slider>
-    </Container>
+      <S.NextItemButton onClick={handleNextItem}>
+      </S.NextItemButton>
+
+      </S.SliderContainer>
+    </S.Container>
   )
 }
 

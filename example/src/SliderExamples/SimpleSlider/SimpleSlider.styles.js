@@ -1,17 +1,10 @@
 import styled from '@emotion/styled'
 export const Container = styled('div')`
+  position: relative;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  .content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-  }
+  width: 90%;
 `
 export const SliderContainer = styled('div')`
   display: flex;

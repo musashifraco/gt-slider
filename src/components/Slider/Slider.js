@@ -12,8 +12,7 @@ export const Slider = ({
   config,
   sliderRef,
   carouselActive,
-  handleMouseDown,
-  handleTouchStart
+  handleMouseDown
 }) => {
   const [sliderWidth, setSliderWidth] = useState(0)
 
@@ -46,15 +45,13 @@ export const Slider = ({
     }
   }, [])
   return (
-    <S.Container>
-      <S.SliderContainer
-        ref={sliderRef}
-        onMouseDown={handleMouseDown}
-        onTouchStart={handleTouchStart}
-        gap={config.gap}
-      >
-        {childrenWithProps}
-      </S.SliderContainer>
+    <S.Container
+      className='slider'
+      ref={sliderRef}
+      onMouseDown={handleMouseDown}
+      gap={config.gap}
+    >
+      {childrenWithProps}
     </S.Container>
   )
 }

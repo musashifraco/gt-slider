@@ -7,7 +7,7 @@ const SimpleSlider = () => {
   const config = {
     visibleElements: 1,
     elementsToScroll: 1,
-    gap: 10,
+    gap: 20,
     centerMode: false,
     infiniteMode: true,
     numberOfElementsWithoutSlider: 14
@@ -18,8 +18,6 @@ const SimpleSlider = () => {
 
   return (
     <S.Container>
-      <S.Title>Simple Slider </S.Title>
-      <S.SliderContainer>
       <S.PrevItemButton onClick={handlePrevItem}>
       </S.PrevItemButton>
       <Slider config={config} {...carouselProps}>
@@ -96,7 +94,6 @@ const SimpleSlider = () => {
       </Slider>
       <S.NextItemButton onClick={handleNextItem}>
       </S.NextItemButton>
-      </S.SliderContainer>
     </S.Container>
   )
 }

@@ -8,11 +8,20 @@ const MultipleItems = () => {
   const config = {
     visibleElements: 3,
     elementsToScroll: 1,
-    gap: 10,
+    gap: '20px',
     centerMode: false,
     infiniteMode: true,
-    numberOfElementsWithoutSlider: 5
-
+    numberOfElementsWithoutSlider: 5,
+    elementInFocus: {
+      scale: '1.1',
+      transition: '0.5s',
+      opacity: '1'
+    },
+    unfocusedElement: {
+      scale: '1',
+      transition: '0.5s',
+      opacity: '0.5'
+    }
   }
 
   const { handleNextItem, handlePrevItem, ...carouselProps } =

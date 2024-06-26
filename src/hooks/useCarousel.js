@@ -1,6 +1,34 @@
 import React, { useRef, useState } from 'react'
 
 export function useCarousel(config) {
+  const configDefault = {
+    visibleElements: 1,
+    elementsToScroll: 1,
+    gap: '20px',
+    centerMode: false,
+    infiniteMode: true,
+    numberOfElementsWithoutSlider: 5,
+    elementInFocus: {
+      scale: '1',
+      transition: '0.5s',
+      opacity: '1'
+    },
+    unfocusedElement: {
+      scale: '1',
+      transition: '0.5s',
+      opacity: '0.7'
+    }
+  }
+
+  for (const chave in configDefault) {
+    // Verificar se a chave já existe no primeiro objeto
+    // eslint-disable-next-line no-prototype-builtins
+    if (!config.hasOwnProperty(chave)) {
+      // Adicionar a propriedade ao primeiro objeto apenas se não existir
+      config[chave] = configDefault[chave]
+    }
+  }
+
   const [carouselActive, setCarouselActive] = useState(0)
   const sliderRef = useRef(null)
 

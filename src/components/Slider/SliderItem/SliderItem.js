@@ -9,10 +9,12 @@ export const SliderItem = ({
   sliderRef,
   config
 }) => {
+  const gapNumber = parseFloat(config.gap)
+
   const numberOfGaps = config.visibleElements + 1
   const sliderItemRef = useRef(null)
   const sliderWidthItem =
-    (sliderWidth - numberOfGaps * config.gap) / config.visibleElements
+    (sliderWidth - numberOfGaps * gapNumber) / config.visibleElements
 
   if (sliderItemRef.current && sliderRef.current) {
     // center mode true
@@ -27,7 +29,7 @@ export const SliderItem = ({
 
     // center mode false
     if (carouselActive === index && config.centerMode === false) {
-      const novaPosicaoScroll = sliderItemRef.current.offsetLeft - config.gap
+      const novaPosicaoScroll = sliderItemRef.current.offsetLeft - gapNumber
       sliderRef.current.scrollLeft = novaPosicaoScroll
     }
   }
@@ -38,6 +40,7 @@ export const SliderItem = ({
       gap={config.gap}
       isActive={index === carouselActive}
       ref={sliderItemRef}
+      config={config}
     >
       {children}
     </Container>

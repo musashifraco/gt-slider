@@ -8,7 +8,7 @@ const CenterMode = () => {
   const config = {
     visibleElements: 3,
     elementsToScroll: 1,
-    gap: 10,
+    gap: '10px',
     centerMode: true,
     infiniteMode: true,
     numberOfElementsWithoutSlider: 5

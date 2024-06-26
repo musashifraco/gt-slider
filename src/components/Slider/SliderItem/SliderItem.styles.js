@@ -7,8 +7,21 @@ export const Container = styled('div')`
     -o-user-drag: none; /* Opera */
   }
 
-  /* background-color: ${(props) =>
-    props.isActive === true ? 'purple' : 'yellow'}; */
+  transition: ${(props) =>
+    props.isActive ? props.config.elementInFocus.transition : 1};
+
+  transform: scale(
+    ${(props) =>
+      props.isActive
+        ? props.config.elementInFocus.scale
+        : props.config.unfocusedElement.scale}
+  );
+
+  opacity: ${(props) =>
+    props.isActive
+      ? props.config.elementInFocus.opacity
+      : props.config.unfocusedElement.opacity};
+
   min-width: ${(props) => {
     return props.sliderWidthItem
   }}px;

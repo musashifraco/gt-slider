@@ -7,10 +7,14 @@ const SimpleSlider = () => {
   const config = {
     visibleElements: 1,
     elementsToScroll: 1,
-    gap: 10,
+    gap: '0px',
     centerMode: false,
     infiniteMode: true,
-    numberOfElementsWithoutSlider: 5
+    numberOfElementsWithoutSlider: 5,
+    elementInFocus: {
+      scale: 1,
+      transition: '0.5s'
+    }
   }
 
   const { handleNextItem, handlePrevItem, ...carouselProps } =

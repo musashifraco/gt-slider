@@ -8,7 +8,7 @@ const FiniteMode = () => {
   const config = {
     visibleElements: 3,
     elementsToScroll: 1,
-    gap: 10,
+    gap: '10px',
     centerMode: false,
     infiniteMode: false,
     numberOfElementsWithoutSlider: 5

@@ -7,8 +7,8 @@ export const Container = styled('div')`
     -o-user-drag: none; /* Opera */
   }
 
-  background-color: ${(props) =>
-    props.isActive === true ? 'purple' : 'yellow'};
+  /* background-color: ${(props) =>
+    props.isActive === true ? 'purple' : 'yellow'}; */
   min-width: ${(props) => {
     return props.sliderWidthItem
   }}px;

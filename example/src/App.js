@@ -4,8 +4,8 @@ import { Container } from './App.styles'
 import './index.css'
 import SimpleSlider from './SliderExamples/SimpleSlider/SimpleSlider'
 import MultipleItems from './SliderExamples/MultipleItems/MultipleItems'
-import CenterMode from './SliderExamples/CenterMode/CenterMode'
 import FiniteMode from './SliderExamples/FiniteMode/FiniteMode'
+import CenterMode from './SliderExamples/CenterMode/CenterMode'
 
 const App = () => {
   return (
